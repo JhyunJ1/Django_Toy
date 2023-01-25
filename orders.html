@@ -10,20 +10,18 @@
             $(document).ready(function () {
                 const search = new URLSearchParams(location.search);
                 const order_id = search.get('order_id');
-                if(order_id > 0) {
-                    $.get("http://127.0.0.1:8000/api/order/")
-                        .then((result) => {
-                            $("#orders").html("")
-                            for (let i = 0; i < result.results.length; i++) {
-                                    const order = result.results[i];
-                                    $("#orders").append(
-                                        $(`<li class="list-group-item">
-                                            ${order.ord_ymd}<br><br>
-                                            ${order.ord_no}</li>`)
-                                    )
-                        } 
-                        });
-                }
+                $.get("http://127.0.0.1:8000/api/order/")
+                    .then((result) => {
+                        $("#orders").html("")
+                        for (let i = 0; i < result.results.length; i++) {
+                                const order = result.results[i];
+                                $("#orders").append(
+                                $(`<li class="list-group-item">
+                                    주문 년도 : ${order.ord_ymd}<br><br>
+                                    주문 번호 : ${order.ord_no}</li>`)
+                                )
+                    } 
+                });
 
                 
             });
