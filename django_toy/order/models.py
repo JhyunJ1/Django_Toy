@@ -11,7 +11,8 @@ class Order(models.Model):
     stbd_code = models.CharField(max_length=16, verbose_name='STBD_CODE')
     ord_qty = models.IntegerField(verbose_name='ORD_QTY')
     ord_uv = models.IntegerField(verbose_name='ORD_UV')
-    mgrn_base_uv = models.IntegerField(verbose_name='MGRN_BASE_UV')
+    mrgn_base_uv = models.IntegerField(verbose_name='MRGN_BASE_UV')
+
 
     class Meta:
         db_table = 'shinhan_order'
