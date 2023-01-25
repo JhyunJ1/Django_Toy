@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'order.apps.OrderConfig'
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination", # 데이터가 많아지면 pagination 사용
+    "PAGE_SIZE": 10,
+    "DEFAULT_AUTHENTIACATION_CLASSES": ( # jwt 인증 방식 사용(postman에서 serial)
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
