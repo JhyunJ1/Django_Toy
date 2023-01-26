@@ -146,7 +146,7 @@ SIMPLE_JWT = { # jwt 가 동작하는 방식
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=1), # 자동 로그인
     "AUTH_HEADER_TYPES": ("JWT", ),
 }
-AUTH_USER_MODEL = 'member.Member'
+AUTH_USER_MODEL = 'member.Member' # 인증 계정을 member.Member로 변경
 AUTHENTICATION_BACKENDS = [
     "member.auth.MemberAuth"
 ]
