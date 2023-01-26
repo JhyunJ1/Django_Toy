@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import mixins, generics
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import check_password, make_password
 
 from .models import Member
 from .serializers import CreateMemberSerializer
@@ -23,12 +24,10 @@ class CreateMember(
     def post(self, request, *args, **kwargs):
         return self.create(request, args, kwargs)
 
-class ChangePassword(
-    APIView
-):
+class ChangePassword(APIView):
+    permission_classes = [IsAuthenticated]
 
     def put(self, request, *args, **kwargs):
-        username = request.data.get('username')
         currentpassword = request.data.get('currentpassword')
         password = request.data.get('password')
         passwordcheck = request.data.get('passwordcheck')
@@ -37,15 +36,10 @@ class ChangePassword(
             return Response({
                 'detail':'Different password'
             }, status=status.HTTP_400_BAD_REQUEST)
-
-        if not Member.objects.filter(username=username).exists():
-            return Response({
-                'detail':'No account'
-            }, status=status.HTTP_404_NOT_FOUND)
         
-        member = Member.objects.get(username=username)
+        member = request.user
 
-        if check_password(currentpassword, member.password):
+        if not check_password(currentpassword, request.user.password):
             return Response({
                 'detail':'Wrong Password'
             }, status=status.HTTP_400_BAD_REQUEST)

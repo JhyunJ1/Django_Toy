@@ -134,7 +134,7 @@ SILENCED_SYSTEM_CHECKS = ['urls.002']
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination", # 데이터가 많아지면 pagination 사용
     "PAGE_SIZE": 10,
-    "DEFAULT_AUTHENTIACATION_CLASSES": ( # jwt 인증 방식 사용(postman에서 serial)
+    "DEFAULT_AUTHENTICATION_CLASSES": ( # jwt 인증 방식 사용(postman에서 serial)
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
@@ -155,5 +155,5 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-if DEBUG:
-    CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_ALL_ORIGINS = True
