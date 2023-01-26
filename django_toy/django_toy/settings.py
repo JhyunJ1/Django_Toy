@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     "corsheaders",
-    'order.apps.OrderConfig'
+    'rest_framework_simplejwt',
+    'debug_toolbar',
+    'order.apps.OrderConfig',
+    'member.apps.MemberConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,5 +139,21 @@ REST_FRAMEWORK = {
     )
 }
 
+import datetime
+SIMPLE_JWT = { # jwt 가 동작하는 방식
+    # Token의 유효기간 
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(days=2), # 2시간 안에 한
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=1), # 자동 로그인
+    "AUTH_HEADER_TYPES": ("JWT", ),
+}
+AUTH_USER_MODEL = 'member.Member'
+AUTHENTICATION_BACKENDS = [
+    "member.auth.MemberAuth"
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 if DEBUG:
-    CORS_ALLOW_ALL_ORIGINS= True
+    CORS_ALLOW_ALL_ORIGINS = True
