@@ -14,7 +14,7 @@ class CommentSerializer(serializers.ModelSerializer):
     )
 
     def get_order_id(self,obj):
-        return obj.order.pk
+        return obj.order.id
     
     def get_member_username(self, obj):
         return obj.member.username

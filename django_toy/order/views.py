@@ -27,6 +27,7 @@ class OrderDetailView(
 ):
     serializer_class = OrderSerializer
 
+
     def get_queryset(self):
         return Order.objects.all().order_by('id')
     
@@ -40,7 +41,8 @@ class CommentListView(
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        return Comment.objects.all()
+        order_id = self.kwargs.get('order_id')
+        return Comment.objects.filter(order_id=order_id)
     
     def get(self, request, *args, **kwargs):
         return self.list(request, args, kwargs)
