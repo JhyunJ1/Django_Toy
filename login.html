@@ -17,20 +17,15 @@
                     },
                     success: (result) => {
                         $('#token').text(result.access);
-                        
                     }
                 })
             }
         </script>
-        <style>
-            h1 {
-                text-align: center;
-            }
-        </style>
     </head>
     <body>
         <div class="container">
-            <h1>Sign In</h1><hr><br><br>
+            <h1 style="text-align: center;">Sign In</h1><hr><br><br>
+            
             <!--아이디-->
             <div class="row mb-3">
                 <label for="username" class="col-sm-2 col-form-label">ID</label>

@@ -8,18 +8,12 @@
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
         <script>
             function signup() {
-                if ($('#password').val() != $("#passwordcheck").val()) {
-                    alert("비밀번호가 다릅니다.");
-                    return;
-                }
-
                 $.ajax({
                     type: 'POST',
                     url: 'http://127.0.0.1:8000/api/member',
                     data: {
                         username: $("#username").val(),
                         password: $("#password").val(),
-                        passwordcheck: $("#passwordcheck").val(),
                         tel: $("#tel").val()
                     },
                     success: (result) => {
@@ -70,12 +64,12 @@
             </div>
 
             <!--비밀번호 확인 -->
-            <div class="row mb-3">
+            <!-- <div class="row mb-3">
                 <label for="passwordcheck" class="col-sm-2 col-form-label">Password Check</label>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" id="passwordcheck" name="passwordcheck">
                 </div>
-            </div>
+            </div> -->
 
             <!--연락처-->
             <div class="row mb-3">
