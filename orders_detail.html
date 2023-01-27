@@ -8,6 +8,7 @@
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
         <script>
+   
             function enroll() {
                 const search = new URLSearchParams(location.search);
                 const order_id = search.get('order_id');
@@ -46,7 +47,9 @@
                                 $("#comments").append(
                                     $(`<li class="list-group-item">
                                         ${comment.content}<br><br>
-                                        ${comment.member_username} (${comment.tstamp})</li>`)
+                                        ${comment.member_username} (${comment.tstamp})
+                                        <button style = "width:50px;">삭제</button></li>
+                                        `)
                                 )
                         } 
                     });
@@ -60,7 +63,7 @@
         <div class="container">
             <h1 id="ord_id" class="text-center">주문</h1>
             <li id="ord_no" class="text-right"></h1>
-            <li id="ord_ymd" class="text-right"></li>
+            <li id="ord_ymd" class="text-right" ></li>
             <ul>
             </ul>
             <hr><br>

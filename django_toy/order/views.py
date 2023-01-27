@@ -47,7 +47,8 @@ class CommentListView(
 
 class CommentCreateView(
     mixins.CreateModelMixin,
-    generics.GenericAPIView
+    generics.GenericAPIView,
+    mixins.DestroyModelMixin
 ):
     serializer_class = CommentCreateSerializer
 
@@ -56,4 +57,9 @@ class CommentCreateView(
     
     def post(self, request, *args, **kwargs):
         return self.create(request, args, kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, args, kwargs)
+    
+    
 
