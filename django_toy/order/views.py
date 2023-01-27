@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, status
+from rest_framework.response import Response
 from .models import Order, Comment
 from .serializers import OrderSerializer, CommentSerializer, CommentCreateSerializer
 from .paginations import OrderLargePagination
@@ -61,7 +62,12 @@ class CommentCreateView(
         return self.create(request, args, kwargs)
     
     def delete(self, request, *args, **kwargs):
-        return self.destroy(request, args, kwargs)
+        pk = request.data.get('pk')
+        if Comment.objects.filter(pk=pk).exists():
+            comment = Comment.objects.get(pk=pk)
+            comment.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
     
 

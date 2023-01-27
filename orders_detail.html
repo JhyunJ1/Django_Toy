@@ -8,7 +8,26 @@
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
         <script>
-   
+            function _delete(pk) {
+                const search = new URLSearchParams(location.search);
+                const order_id = search.get('order_id');
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://127.0.0.1:8000/api/order/comment',
+                    data: {
+                        order: order_id,
+                        pk: pk
+                    },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "JWT " + $("#token").val());
+                    },
+                    success: (result) => {
+                        alert('댓글이 정상적으로 삭제되었습니다.');
+                        document.location.reload();
+                    }
+                })
+            }         
+
             function enroll() {
                 const search = new URLSearchParams(location.search);
                 const order_id = search.get('order_id');
@@ -30,8 +49,7 @@
             }
             $(document).ready(function () {
                 $(".pagination").html("")
-    
-            
+
                 const search = new URLSearchParams(location.search);
                 const order_id = search.get('order_id');
 
@@ -76,7 +94,7 @@
                                         $(`<li class="list-group-item">
                                             ${comment.content}<br><br>
                                             ${comment.member_username} (${comment.tstamp})
-                                            <button style = "width:50px;">삭제</button></li>
+                                            <button style = "width:50px;" onclick="_delete(${comment.id})">삭제</button></li>
                                             `)
                                     )
                             } 
